@@ -1,14 +1,6 @@
-FROM mongo:latest
-VOLUME db:/data/db
-
 FROM node:17.2.0-alpine
 WORKDIR /home/node/app
-VOLUME - ./:/home/node/app
-CMD ["npm start"]
-ENV TOKEN=${TOKEN}
-ENV MONGODB_ENABLED=${MONGODB_ENABLED}
-ENV MONGODB_URL=mongodb://mongodb:27017
-ENV WEBHOOK_ENABLED=${WEBHOOK_ENABLED}
-ENV WEBHOOK_URL=${WEBHOOK_URL}
-ENV WEBHOOK_BASE64=${WEBHOOK_BASE64}
-
+COPY package*.json .
+RUN yarn install
+COPY . .
+CMD ["yarn","start"]

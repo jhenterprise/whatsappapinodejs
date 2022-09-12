@@ -13,10 +13,10 @@ services:
         container_name: api
         depends_on:
             - mongodb
-        user: 'node'
-        restart: unless-stopped
+        #user: 'node'
+        #restart: unless-stopped
         env_file: .env
-        command: 'npm start'
+        #command: 'npm start'
         ports:
             - ${PORT}:${PORT}
         environment:
@@ -30,7 +30,8 @@ services:
         volumes:
             - ./:/home/node/app
         working_dir: /home/node/app
-        image: node:17.2.0-alpine
+        # image: node:17.2.0-alpine
+        build: .
 
 volumes:
     db:
